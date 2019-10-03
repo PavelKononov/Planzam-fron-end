@@ -1,0 +1,103 @@
+
+
+<ion-content>
+    <ion-button color="success" style="width: 100%" routerLink="/app/categories/new-plan"> Create new plan</ion-button>
+    <ion-list>
+        <ion-card *ngFor="let plan of planList">
+            <h2>{{plan.planName}}</h2>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-label>
+                            Captain : {{plan.captain}}
+                        </ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>
+                            Categories : {{plan.categories}}
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-label>
+                            Number of invites : {{plan.invites}}
+                        </ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>
+                            {{(plan.accept / plan.invites) * 100}}% - invites accepted
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-label>
+                            Invites accept : {{plan.accept}}
+                        </ion-label>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>
+                            Reserved
+                        </ion-label>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </ion-list>
+    <!--
+    <ion-row class="categories-list">
+        <ion-col class="category-item travel-category" size="12">
+            <app-image-shell [mode]="'cover'" class="category-cover" animation="spinner"
+                             [src]="'./assets/images_planzam/6s.jpg'">
+                <app-aspect-ratio [ratio]="{w:75, h:49}">
+                    <a class="category-anchor" [routerLink]="['/app/categories/travel']">
+                        <h2 class="category-title">Travel</h2>
+                    </a>
+                </app-aspect-ratio>
+            </app-image-shell>
+        </ion-col>
+        <ion-col class="category-item fashion-category" size="6">
+            <app-image-shell [mode]="'cover'" class="category-cover" animation="spinner"
+                             [src]="'./assets/images_planzam/6s.jpg'">
+                <app-aspect-ratio [ratio]="{w:1, h:1}">
+                    <a class="category-anchor" [routerLink]="['/app/categories/fashion']">
+                        <h2 class="category-title">Fashion</h2>
+                    </a>
+                </app-aspect-ratio>
+            </app-image-shell>
+        </ion-col>
+        <ion-col class="category-item food-category" size="6">
+            <app-image-shell [mode]="'cover'" class="category-cover" animation="spinner"
+                             [src]="'./assets/images_planzam/6s.jpg'">
+                <app-aspect-ratio [ratio]="{w:1, h:1}">
+                    <a class="category-anchor" [routerLink]="['/app/categories/food']">
+                        <h2 class="category-title">Food</h2>
+                    </a>
+                </app-aspect-ratio>
+            </app-image-shell>
+        </ion-col>
+        <ion-col class="category-item deals-category" size="12">
+            <app-image-shell [mode]="'cover'" class="category-cover" animation="spinner"
+                             [src]="'./assets/images_planzam/6s.jpg'">
+                <app-aspect-ratio [ratio]="{w:75, h:30}">
+                    <a class="category-anchor" [routerLink]="['/app/categories/deals']">
+                        <h2 class="category-title">Deals</h2>
+                    </a>
+                </app-aspect-ratio>
+            </app-image-shell>
+        </ion-col>
+        <ion-col class="category-item real-state-category" size="12">
+            <app-image-shell [mode]="'cover'" class="category-cover" animation="spinner"
+                             [src]="'./assets/images_planzam/6s.jpg'">
+                <app-aspect-ratio [ratio]="{w:75, h:30}">
+                    <a class="category-anchor" [routerLink]="['/app/categories/real-state']">
+                        <h2 class="category-title">Real State</h2>
+                    </a>
+                </app-aspect-ratio>
+            </app-image-shell>
+        </ion-col>
+    </ion-row>
+  -->
+</ion-content>
+

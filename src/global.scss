@@ -1,0 +1,45 @@
+// http://ionicframework.com/docs/theming/
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+// EXTRA GLOBAL STYLES
+// Add custom Ionic Colors
+@import "./theme/custom-ion-colors.scss";
+// Add base app styles
+@import "./theme/app-defaults.scss";
+// Add base shell styles
+@import "./theme/shell-defaults.scss";
+
+ion-content{
+  top:70px ;
+  bottom: 60px;
+}
+h1{
+  color: #1C1C1C;
+}
+ion-content[scrollx=true], ion-content[scrolly=true] {
+  position: relative;
+  overflow: hidden;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+ion-content[scrollx=true] {
+  overflow-x: auto;
+}
+
+ion-content[scrolly=true] {
+  overflow-y: auto;
+}
