@@ -1,8 +1,12 @@
-<ion-header no-border>
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+    <ion-img slot="end" class="header-logo" src="../../assets/images_planzam/logo-light.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
@@ -23,25 +27,23 @@
             <app-text-shell [data]="profile.job"></app-text-shell>
           </h5>
         </ion-col>
-        <ion-col class="membership-col">
-          <span class="user-membership">
-            <app-text-shell [data]="profile.membership"></app-text-shell>
-          </span>
-        </ion-col>
+<!--        <ion-col class="membership-col">-->
+<!--          <span class="user-membership">-->
+<!--            <app-text-shell [data]="profile.membership"></app-text-shell>-->
+<!--          </span>-->
+<!--        </ion-col>-->
       </ion-row>
-      <ion-row class="actions-row">
-        <ion-col class="main-actions">
-          <!--
-          <ion-button class="call-to-action-btn" size="small" color="primary">{{ 'FOLLOW' | translate }}</ion-button>
-          <ion-button class="call-to-action-btn" size="small" color="medium">{{ 'MESSAGE' | translate }}</ion-button>
-          -->
-        </ion-col>
-        <ion-col class="secondary-actions">
-          <ion-button class="more-btn" size="small" fill="clear" color="medium" (click)="openLanguageChooser()">
-            <ion-icon slot="icon-only" name="more"></ion-icon>
-          </ion-button>
-        </ion-col>
-      </ion-row>
+<!--      <ion-row class="actions-row">-->
+<!--        <ion-col class="main-actions">          -->
+<!--          <ion-button class="call-to-action-btn" size="small" color="primary">{{ 'FOLLOW' | translate }}</ion-button>-->
+<!--          <ion-button class="call-to-action-btn" size="small" color="medium">{{ 'MESSAGE' | translate }}</ion-button>          -->
+<!--        </ion-col>-->
+<!--        <ion-col class="secondary-actions">-->
+<!--          <ion-button class="more-btn" size="small" fill="clear" color="medium" (click)="openLanguageChooser()">-->
+<!--            <ion-icon slot="icon-only" name="more"></ion-icon>-->
+<!--          </ion-button>-->
+<!--        </ion-col>-->
+<!--      </ion-row>-->
     </ion-col>
   </ion-row>
   <ion-row class="user-stats-section">
@@ -49,19 +51,19 @@
       <span class="stat-value">
         <app-text-shell [data]="profile.likes"></app-text-shell>
       </span>
-      <span class="stat-name">{{ 'LIKES' | translate }}</span>
+      <span class="stat-name">{{ 'PLANS' | translate }}</span>
     </ion-col>
     <ion-col class="user-stats-wrapper" size="4">
       <span class="stat-value">
         <app-text-shell [data]="profile.followers"></app-text-shell>
       </span>
-      <span class="stat-name">{{ 'FOLLOWERS' | translate }}</span>
+      <span class="stat-name">{{ 'CONTACTS' | translate }}</span>
     </ion-col>
     <ion-col class="user-stats-wrapper" size="4">
       <span class="stat-value">
         <app-text-shell [data]="profile.following"></app-text-shell>
       </span>
-      <span class="stat-name">{{ 'FOLLOWING' | translate }}</span>
+      <span class="stat-name">{{ 'BOOKED PLANS' | translate }}</span>
     </ion-col>
   </ion-row>
   <div class="user-about-section">

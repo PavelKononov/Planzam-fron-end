@@ -4,6 +4,11 @@
   --page-margin: var(--app-narrow-margin);
 }
 
+.header-logo{
+  background-size: 74px 14px;
+  width:74px;
+  height: 55px;
+}
 // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
 .notifications-content {
   ion-item-divider {

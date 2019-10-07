@@ -1,7 +1,17 @@
-
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            My Dashboard
+        </ion-title>
+        <ion-img slot="end" class="header-logo" src="../../assets/images_planzam/logo-light.png"></ion-img>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content>
-    <ion-button color="success" style="width: 100%" routerLink="/app/categories/new-plan"> Create new plan</ion-button>
+    <ion-button color="success" style="width:100%;margin-top:15px;" routerLink="/app/categories/new-plan"> Create new plan</ion-button>
     <ion-list>
         <ion-card *ngFor="let plan of planList">
             <h2>{{plan.planName}}</h2>
