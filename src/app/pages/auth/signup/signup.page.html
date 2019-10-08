@@ -20,13 +20,14 @@
     <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
         <ion-list class="inputs-list" lines="full">
             <ion-item class="input-item">
-                <ion-input type="email" placeholder="Firstname" formControlName="firstname" clearInput autocapitalize="off"
+                <ion-input type="email" placeholder="Firstname" formControlName="firstName" clearInput
+                           autocapitalize="off"
                            inputmode="email"></ion-input>
             </ion-item>
             <div class="error-container">
-                <ng-container *ngFor="let validation of validation_messages.firstname">
+                <ng-container *ngFor="let validation of validation_messages.firstName">
                     <div class="error-message"
-                         *ngIf="signupForm.get('firstname').hasError(validation.type) && (signupForm.get('firstname').dirty || signupForm.get('firstname').touched)">
+                         *ngIf="signupForm.get('firstName').hasError(validation.type) && (signupForm.get('firstName').dirty || signupForm.get('firstName').touched)">
                         <ion-icon name="information-circle-outline"></ion-icon>
                         <span>{{ validation.message }}</span>
                     </div>
@@ -34,13 +35,14 @@
             </div>
 
             <ion-item class="input-item">
-                <ion-input type="email" placeholder="Surname" formControlName="surname" clearInput autocapitalize="off"
+                <ion-input type="email" placeholder="Surname" formControlName="secondName" clearInput
+                           autocapitalize="off"
                            inputmode="email"></ion-input>
             </ion-item>
             <div class="error-container">
-                <ng-container *ngFor="let validation of validation_messages.surname">
+                <ng-container *ngFor="let validation of validation_messages.secondName">
                     <div class="error-message"
-                         *ngIf="signupForm.get('surname').hasError(validation.type) && (signupForm.get('surname').dirty || signupForm.get('surname').touched)">
+                         *ngIf="signupForm.get('secondName').hasError(validation.type) && (signupForm.get('secondName').dirty || signupForm.get('secondName').touched)">
                         <ion-icon name="information-circle-outline"></ion-icon>
                         <span>{{ validation.message }}</span>
                     </div>
@@ -126,7 +128,7 @@
     </div>
 
     <div class="legal-stuff">
-<!--        By creating an account you agree to our <a class="legal-action" (click)="showPrivacyModal()">Privacy Policy</a>-->
-<!--        and <a class="legal-action" (click)="showTermsModal()">Terms of use</a>.-->
+        <!--        By creating an account you agree to our <a class="legal-action" (click)="showPrivacyModal()">Privacy Policy</a>-->
+        <!--        and <a class="legal-action" (click)="showTermsModal()">Terms of use</a>.-->
     </div>
 </ion-content>

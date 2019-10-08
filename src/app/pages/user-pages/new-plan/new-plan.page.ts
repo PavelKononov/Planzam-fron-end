@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavController, NavParams} from '@ionic/angular';
 import {MapsPage} from '../../old-pages/maps/maps.page';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-new-plan',
@@ -10,9 +12,11 @@ import {MapsPage} from '../../old-pages/maps/maps.page';
 })
 export class NewPlanPage implements OnInit {
     public step = 1;
-    public planName='';
-    public tab=1;
-   accardion=0;
+    public planName = '';
+    public tab = 1;
+    public accardion = 0;
+    public planForm: FormGroup;
+
     public sortTypes = [
         {
             name: 'Cultural / Arts',
@@ -69,7 +73,7 @@ export class NewPlanPage implements OnInit {
                 }]
         },
     ];
-    public socialPeople=[
+    public socialPeople = [
         {
             name: 'Planzam',
             types: [
@@ -138,23 +142,23 @@ export class NewPlanPage implements OnInit {
                     id: 2,
                     name: 'contact 2',
 
-                },{
+                }, {
                     id: 3,
                     name: 'contact 3',
 
-                },{
+                }, {
                     id: 4,
                     name: 'contact 4',
 
-                },{
+                }, {
                     id: 5,
                     name: 'contact 5',
 
-                },{
+                }, {
                     id: 6,
                     name: 'contact 6',
 
-                },{
+                }, {
                     id: 7,
                     name: 'contact 7',
 
@@ -162,38 +166,62 @@ export class NewPlanPage implements OnInit {
         },
 
     ];
-acc=[
-    {
-        name:'non-cheked'
-    },
-    {
-        name:'non-cheked'
-    },
-    {
-        name:'non-cheked'
-    }
-]
+    acc = [
+        {
+            name: 'non-cheked'
+        },
+        {
+            name: 'non-cheked'
+        },
+        {
+            name: 'non-cheked'
+        }
+    ];
 
-    constructor(private navCtrl: NavController,    public modal: ModalController,
+    constructor(private navCtrl: NavController, public modal: ModalController, private _fb: FormBuilder, storage: Storage
     ) {
-
+        this.createFormGroup();
     }
-    switchAccordion(i){
-        this.accardion=this.accardion==i?this.accardion=0:this.accardion=i;
+
+    switchAccordion(i) {
+        this.accardion = this.accardion == i ? this.accardion = 0 : this.accardion = i;
     }
 
     ngOnInit(): void {
+
     }
 
-    dissmis(){
-        this.modal.dismiss({dimiss:true});
+    dissmis() {
+        this.modal.dismiss({dimiss: true});
     }
-    async openMap(){
+
+    async openMap() {
         console.log('pre load modal');
         const modal = await this.modal.create({
             component: MapsPage
         });
         return await modal.present();
+
+    }
+
+    createFormGroup() {
+        this.planForm = this._fb.group({
+            name: [''],
+            category_name: [''],
+            second_name: [''],
+            date: [''],
+            lat: [''],
+            lng: [''],
+            radius: [''],
+            user_id: ['']
+        });
+    }
+
+    selectType() {
+
+    }
+
+    createForm() {
 
     }
 }

@@ -1,116 +1,122 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ModalController, MenuController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {Validators, FormGroup, FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ModalController, MenuController} from '@ionic/angular';
 
-import { TermsOfServicePage } from '../../../terms-of-service/terms-of-service.page';
-import { PrivacyPolicyPage } from '../../../privacy-policy/privacy-policy.page';
-import { PasswordValidator } from '../../../validators/password.validator';
+import {TermsOfServicePage} from '../../../terms-of-service/terms-of-service.page';
+import {PrivacyPolicyPage} from '../../../privacy-policy/privacy-policy.page';
+import {PasswordValidator} from '../../../validators/password.validator';
+import {AuthProvider} from '../../../../providers/auth/auth';
 
 @Component({
-  selector: 'app-signUp',
-  templateUrl: './signup.page.html',
-  styleUrls: [
-    './signup.page.scss'
-  ]
+    selector: 'app-signUp',
+    templateUrl: './signup.page.html',
+    styleUrls: [
+        './signup.page.scss'
+    ]
 })
 export class SignupPage implements OnInit {
-  signupForm: FormGroup;
-  matching_passwords_group: FormGroup;
+    signupForm: FormGroup;
+    matching_passwords_group: FormGroup;
 
-  validation_messages = {
-    'surname': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
-    ],
-    'firstname': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
-    ],
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
-    ],
-    'password': [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' }
-    ],
-    'confirm_password': [
-      { type: 'required', message: 'Confirm password is required' }
-    ],
-    'matching_passwords': [
-      { type: 'areNotEqual', message: 'Password mismatch' }
-    ]
-  };
+    validation_messages = {
+        'secondName': [
+            {type: 'required', message: 'Email is required.'},
+            {type: 'pattern', message: 'Enter a valid email.'}
+        ],
+        'firstName': [
+            {type: 'required', message: 'Email is required.'},
+            {type: 'pattern', message: 'Enter a valid email.'}
+        ],
+        'email': [
+            {type: 'required', message: 'Email is required.'},
+            {type: 'pattern', message: 'Enter a valid email.'}
+        ],
+        'password': [
+            {type: 'required', message: 'Password is required.'},
+            {type: 'minlength', message: 'Password must be at least 5 characters long.'}
+        ],
+        'confirm_password': [
+            {type: 'required', message: 'Confirm password is required'}
+        ],
+        'matching_passwords': [
+            {type: 'areNotEqual', message: 'Password mismatch'}
+        ]
+    };
 
-  constructor(
-    public router: Router,
-    public modalController: ModalController,
-    public menu: MenuController
-  ) {
-    this.matching_passwords_group = new FormGroup({
-      'password': new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required
-      ])),
-      'confirm_password': new FormControl('', Validators.required)
-    }, (formGroup: FormGroup) => {
-      return PasswordValidator.areNotEqual(formGroup);
-    });
+    constructor(
+        public router: Router,
+        public modalController: ModalController,
+        public menu: MenuController,
+        private auth: AuthProvider
+    ) {
+        this.matching_passwords_group = new FormGroup({
+            'password': new FormControl('', Validators.compose([
+                Validators.minLength(5),
+                Validators.required
+            ])),
+            'confirm_password': new FormControl('', Validators.required)
+        }, (formGroup: FormGroup) => {
+            return PasswordValidator.areNotEqual(formGroup);
+        });
 
-    this.signupForm = new FormGroup({
-      'email': new FormControl('test@test.com', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      'matching_passwords': this.matching_passwords_group,
-      'firstname': new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      'surname': new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-    });
+        this.signupForm = new FormGroup({
+            'email': new FormControl('test@test.com', Validators.compose([
+                Validators.required,
+                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+            ])),
+            'matching_passwords': this.matching_passwords_group,
+            'firstName': new FormControl('', Validators.compose([
+                Validators.required,
+                //  Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+            ])),
+            'secondName': new FormControl('', Validators.compose([
+                Validators.required,
+                //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+            ])),
+        });
 
-  }
+    }
 
-  ngOnInit(): void {
-    this.menu.enable(false);
-  }
+    ngOnInit(): void {
+        this.menu.enable(false);
+    }
 
-  async showTermsModal() {
-    const modal = await this.modalController.create({
-      component: TermsOfServicePage
-    });
-    return await modal.present();
-  }
+    async showTermsModal() {
+        const modal = await this.modalController.create({
+            component: TermsOfServicePage
+        });
+        return await modal.present();
+    }
 
-  async showPrivacyModal() {
-    const modal = await this.modalController.create({
-      component: PrivacyPolicyPage
-    });
-    return await modal.present();
-  }
+    async showPrivacyModal() {
+        const modal = await this.modalController.create({
+            component: PrivacyPolicyPage
+        });
+        return await modal.present();
+    }
 
-  doSignup(): void {
-    console.log('do sign up');
-    this.router.navigate(['app/categories']);
-  }
+    doSignup(): void {
+        this.auth.signUp(this.signupForm.value).then(res => {
+            console.log(res);
+            if (!res['error']) {
+                this.router.navigate(['app/categories']);
+            }
+        });
+    }
 
-  doFacebookSignup(): void {
-    console.log('facebook signup');
-    this.router.navigate(['app/categories']);
-  }
+    doFacebookSignup(): void {
+        console.log('facebook signup');
+        this.router.navigate(['app/categories']);
+    }
 
-  doGoogleSignup(): void {
-    console.log('google signup');
-    this.router.navigate(['app/categories']);
-  }
+    doGoogleSignup(): void {
+        console.log('google signup');
+        this.router.navigate(['app/categories']);
+    }
 
-  doTwitterSignup(): void {
-    console.log('twitter signup');
-    this.router.navigate(['app/categories']);
-  }
+    doTwitterSignup(): void {
+        console.log('twitter signup');
+        this.router.navigate(['app/categories']);
+    }
 }
