@@ -7,7 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComponentsModule} from '../../../components/components.module';
 
 import {NewPlanPage} from './new-plan.page';
-import {MapsPage} from '../../old-pages/maps/maps.page';
+import {MapsPage} from '../maps/maps.page';
 
 const categoriesRoutes: Routes = [
     {

@@ -16,7 +16,7 @@ export class AuthProvider {
     public signIn(data) {
         return new Promise(resolve => {
             this.http.post('/auth/login', data).subscribe(res => {
-                this.storage.set('user', res).then(() => {
+                this.storage.set('user', res['user']).then(() => {
 
                     return resolve(res);
                 });
@@ -29,7 +29,10 @@ export class AuthProvider {
     public signUp(data) {
         return new Promise(resolve => {
             this.http.post('/auth/signUp', data).subscribe(res => {
-                return resolve(res);
+                this.storage.set('user', res['create_user']).then(() => {
+
+                    return resolve(res);
+                });
             });
         });
     }

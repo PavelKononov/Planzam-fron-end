@@ -15,6 +15,7 @@ export class PlansProvider {
 
     public getAllPlans() {
         return new Promise(resolve => {
+            console.log('get all plans');
             this.http.get('/api/plans/').subscribe(res => {
                 return resolve(res);
             });

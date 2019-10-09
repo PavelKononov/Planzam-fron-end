@@ -13,36 +13,8 @@ import {PlansProvider} from '../../../../providers/plans/plans';
     ]
 })
 export class CategoriesPage implements OnInit {
-    public planList = [
-        {
-            planName: 'test1',
-            captain: ' name',
-            categories: ' name',
-            invites: 10,
-            accept: 0,
-        },
-        {
-            planName: 'test2',
-            captain: 'captain name',
-            categories: 'category name',
-            invites: 10,
-            accept: 2,
-        },
-        {
-            planName: 'test3',
-            captain: ' name',
-            categories: ' name',
-            invites: 10,
-            accept: 3,
-        },
-        {
-            planName: 'test4',
-            captain: 'name',
-            categories: ' name',
-            invites: 10,
-            accept: 5,
-        }
-    ];
+    public planList:any;
+
 
     constructor(
         private alertController: AlertController,
@@ -54,11 +26,7 @@ export class CategoriesPage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.plansProvide.getAllPlans().then(
-            res => {
-                console.log(res);
-            }
-        );
+
     }
 
     newPlan() {
@@ -66,7 +34,13 @@ export class CategoriesPage implements OnInit {
         this.router.navigate(['/app/new-plan']);
 
     }
-
+    ionViewWillEnter(){
+        this.plansProvide.getAllPlans().then(
+            res => {
+                this.planList=res['plans'];
+            }
+        );
+    }
     /*
     async presentAlertPrompt() {
       const alert = await this.alertController.create({

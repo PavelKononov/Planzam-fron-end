@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavController, NavParams} from '@ionic/angular';
-import {MapsPage} from '../../old-pages/maps/maps.page';
+import {MapsPage} from '../maps/maps.page';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Storage} from '@ionic/storage';
+import {PlansProvider} from '../../../../providers/plans/plans';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-new-plan',
@@ -15,8 +17,23 @@ export class NewPlanPage implements OnInit {
     public planName = '';
     public tab = 1;
     public accardion = 0;
-    public planForm: FormGroup;
-
+    public planForm = {
+        name: '',
+        date: '',
+        user_id: '',
+        events:[]
+    };
+    public eventForm =
+        {
+            category_name: '',
+            second_name: '',
+            lat: '',
+            lng: '',
+            radius: '',
+            date: '',
+        };
+    public events = [];
+    private user:any;
     public sortTypes = [
         {
             name: 'Cultural / Arts',
@@ -178,9 +195,13 @@ export class NewPlanPage implements OnInit {
         }
     ];
 
-    constructor(private navCtrl: NavController, public modal: ModalController, private _fb: FormBuilder, storage: Storage
+    constructor(private navCtrl: NavController, public modal: ModalController, private _fb: FormBuilder, private storage: Storage, private plansProvide:PlansProvider,private router:Router
     ) {
-        this.createFormGroup();
+        this.storage.get('user').then(user=>{
+            this.user=user;
+        })
+        this.createPlansForm();
+        this.createEventForm();
     }
 
     switchAccordion(i) {
@@ -196,32 +217,62 @@ export class NewPlanPage implements OnInit {
     }
 
     async openMap() {
+        console.log(this.eventForm);
         console.log('pre load modal');
         const modal = await this.modal.create({
             component: MapsPage
+        });
+        modal.onDidDismiss().then(data => {
+            if (data.data.location && data.data.location) {
+                this.eventForm.lat = data.data.location.lat;
+            }
+            this.eventForm.lng = data.data.location.lng;
+
         });
         return await modal.present();
 
     }
 
-    createFormGroup() {
-        this.planForm = this._fb.group({
-            name: [''],
-            category_name: [''],
-            second_name: [''],
-            date: [''],
-            lat: [''],
-            lng: [''],
-            radius: [''],
-            user_id: ['']
-        });
+    createEventForm() {
+        this.eventForm =
+            {
+                category_name: '',
+                second_name: '',
+                lat: '',
+                lng: '',
+                radius: '',
+                date: '',
+            };
+
     }
 
-    selectType() {
+    createPlansForm() {
+        this.planForm = {
+            name: '',
+            date: '',
+            user_id: '',
+            events:[]
+        };
+    }
 
+    selectType(event, i) {
+        this.eventForm.category_name = this.sortTypes[i].name;
+        this.eventForm.second_name = event.detail.value;
+        this.step = 3;
+    }
+
+    addEvent() {
+        this.events.push(this.eventForm);
+        this.planForm.date=this.eventForm.date;
+        this.createEventForm();
+        this.step = 2;
     }
 
     createForm() {
-
+        this.planForm.user_id=this.user.id;
+        this.planForm.events=this.events;
+        this.plansProvide.createPlan(this.planForm ).then(res=>{
+            this.router.navigate(['/app/categories'])
+        })
     }
 }

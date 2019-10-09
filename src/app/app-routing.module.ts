@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'page-not-found', loadChildren: () => import('./pages/auth/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule) },
   { path: 'showcase', loadChildren: () => import('./pages/old-pages/showcase/showcase.module').then(m => m.ShowcasePageModule) },
   { path: 'firebase', loadChildren: () => import('./pages/old-pages/firebase/firebase-integration.module').then(m => m.FirebaseIntegrationModule) },
-  { path: 'maps', loadChildren: () => import('./pages/old-pages/maps/maps.module').then(m => m.MapsPageModule) },
+  { path: 'maps', loadChildren: () => import('./pages/user-pages/maps/maps.module').then(m => m.MapsPageModule) },
   { path: 'video-playlist', loadChildren: () => import('./video-playlist/video-playlist.module').then(m => m.VideoPlaylistPageModule) },
   { path: '**', redirectTo: 'page-not-found' },
   { path: 'getting-started', loadChildren: () => import('./pages/old-pages/getting-started/getting-started.module').then(m => m.GettingStartedPageModule) }

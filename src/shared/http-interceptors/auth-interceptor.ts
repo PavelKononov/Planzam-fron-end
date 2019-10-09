@@ -43,8 +43,8 @@ export class AuthInterceptor implements HttpInterceptor {
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
         const authReq = req.clone({
             //url: API_URL + req.url,
-            // url: 'http://planzam-dev.eu-west-2.elasticbeanstalk.com:3015' + req.url,
-            url: 'http://localhost:3015' + req.url,
+             url: 'http://planzam-dev.eu-west-2.elasticbeanstalk.com' + req.url,
+          //  url: 'http://localhost:3015' + req.url,
 
         });
         return next.handle(authReq);
